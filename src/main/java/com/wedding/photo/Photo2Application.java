@@ -21,12 +21,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 @SpringBootApplication
 public class Photo2Application {
-    private final AtomicInteger savedFileCount = new AtomicInteger(0);
     private final Path UPLOAD_DIR = Paths.get("uploads");
     private static final long MAX_IMAGE_SIZE = 20 * 1024 * 1024; // 20MB
     private static final long MAX_VIDEO_SIZE = 5L * 1024 * 1024 * 1024; // 5GB
@@ -70,7 +68,7 @@ public class Photo2Application {
                     FormFieldPart namePart = (FormFieldPart) parts.getFirst("name");
                     String name = (namePart != null) ? sanitizeName(namePart.value()) : "unknown";
 
-                    String extension = getFileExtension(filePart.filename());
+                    String extension = getFileExtension(Objects.requireNonNull(filePart).filename());
 
                     return checkFileTypeAndSize(filePart)
                             .then(Mono.fromCallable(() -> generateUniqueFileName(name, extension)))
@@ -86,15 +84,15 @@ public class Photo2Application {
     private String generateUniqueFileName(String baseName, String extension) {
         String fileName;
         do {
-            String randomString = generateRandomString(RANDOM_STRING_LENGTH);
+            String randomString = generateRandomString();
             fileName = baseName + "_" + randomString + "." + extension;
         } while (Files.exists(UPLOAD_DIR.resolve(fileName)));
         return fileName;
     }
 
-    private String generateRandomString(int length) {
-        StringBuilder sb = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
+    private String generateRandomString() {
+        StringBuilder sb = new StringBuilder(Photo2Application.RANDOM_STRING_LENGTH);
+        for (int i = 0; i < Photo2Application.RANDOM_STRING_LENGTH; i++) {
             sb.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
         }
         return sb.toString();

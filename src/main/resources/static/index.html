@@ -153,7 +153,7 @@
             stroke: #fff;
             stroke-miterlimit: 10;
             margin: 10% auto;
-            box-shadow: inset 0px 0px 0px #7ac142;
+            box-shadow: inset 0 0 0 #7ac142;
             animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
         }
         .checkmark__check {
@@ -177,7 +177,7 @@
         }
         @keyframes fill {
             100% {
-                box-shadow: inset 0px 0px 0px 30px #7ac142;
+                box-shadow: inset 0 0 0 30px #7ac142;
             }
         }
 
@@ -226,7 +226,7 @@
 
     <div id="uploadModal" class="modal">
         <div class="modal-content">
-            <h2>업로드가 진행중입니다..</h2>
+            <h2 id="uploadTitle">업로드가 진행중입니다..</h2>
             <div id="progress"></div>
             <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" style="display: none;">
                 <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
@@ -242,6 +242,7 @@
         const progressDiv = document.getElementById('progress');
         const modal = document.getElementById('uploadModal');
         const checkmark = document.querySelector('.checkmark');
+        const uploadTitle = document.getElementById('uploadTitle')
 
         function getVideoThumbnail(file) {
             return new Promise((resolve) => {
@@ -261,7 +262,7 @@
             });
         }
 
-        fileInput.addEventListener('change', async function(e) {
+        fileInput.addEventListener('change', async function() {
             preview.innerHTML = '';
             for (let file of this.files) {
                 let src;
@@ -300,7 +301,6 @@
                     });
 
                     if (response.ok) {
-                        const count = await response.text();
                         progressDiv.innerHTML = `파일 업로드 중... (${i + 1}/${files.length})`;
                     } else {
                         progressDiv.innerHTML += `<br>파일 ${i + 1} 업로드 실패: ${response.statusText}`;
@@ -311,7 +311,8 @@
             }
 
             checkmark.style.display = 'block';
-            progressDiv.innerHTML = '모든 업로드가 완료되었습니다!\n감사합니다!';
+            uploadTitle.innerHTML = '업로드가 완료되었습니다.'
+            progressDiv.innerHTML = '모든 파일의 업로드가 완료되었습니다!<br>감사합니다!';
 
             // 업로드 완료 후 3초 뒤에 모달창 닫기
             setTimeout(() => {
