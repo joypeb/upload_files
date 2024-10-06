@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웨딩 포토 업로드</title>
+    <title>이승준, 박은솔 Wedding Photo</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Serif+KR:wght@400;700&display=swap');
         body {
             font-family: 'Noto Serif KR', serif;
             margin: 0;
             padding: 20px;
-            background-color: #fff5f5;
+            background-color: #afb8af;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,7 +19,7 @@
         .container {
             max-width: 600px;
             width: 100%;
-            background-color: white;
+            background-color: #fff;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -30,17 +30,17 @@
         }
         .names {
             font-size: 2.5em;
-            color: #d4af37;
+            color: #344C3D;
             margin-bottom: 10px;
         }
         .wedding-photo {
             font-family: 'Great Vibes', cursive;
             font-size: 3em;
-            color: #ff9999;
+            color: #738A6E;
             margin-top: 10px;
         }
         .heart {
-            color: #ff6b6b;
+            color: #344C3D;
             font-size: 1em;
             display: inline-block;
             animation: beat 1s infinite alternate;
@@ -55,24 +55,26 @@
         }
         label {
             margin-bottom: 10px;
-            color: #666;
+            color: #344C3D;
             font-size: 1.1em;
         }
         input[type="text"] {
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid #738A6E;
             border-radius: 25px;
             font-size: 16px;
             text-align: center;
+            background-color: #ffffff;
+            color: #344C3D;
         }
         .file-input-wrapper {
             width: 100%;
             max-width: 300px;
             height: 150px;
             margin-bottom: 20px;
-            background-color: #ffd1dc;
+            background-color: #738A6E;
             border-radius: 15px;
             display: flex;
             justify-content: center;
@@ -82,7 +84,7 @@
             position: relative;
         }
         .file-input-wrapper:hover {
-            background-color: #ffb6c1;
+            background-color: #8EA58C;
         }
         .file-input-wrapper input[type=file] {
             position: absolute;
@@ -94,7 +96,7 @@
             cursor: pointer;
         }
         .file-input-wrapper .btn {
-            color: #666;
+            color: #e1eadf;
             font-size: 18px;
             text-align: center;
         }
@@ -112,8 +114,8 @@
             border-radius: 10px;
         }
         button[type="submit"] {
-            background-color: #ff9999;
-            color: white;
+            background-color: #344C3D;
+            color: #e1eadf;
             border: none;
             padding: 15px 30px;
             font-size: 18px;
@@ -122,7 +124,7 @@
             transition: background-color 0.3s;
         }
         button[type="submit"]:hover {
-            background-color: #ff7777;
+            background-color: #738A6E;
         }
         .modal {
             display: none;
@@ -135,7 +137,7 @@
             background-color: rgba(0,0,0,0.5);
         }
         .modal-content {
-            background-color: white;
+            background-color: #BFCFBB;
             margin: 15% auto;
             padding: 30px;
             border-radius: 15px;
@@ -146,19 +148,19 @@
         }
         .modal-content h2 {
             margin-top: 0;
-            color: #d4af37;
+            color: #344C3D;
         }
         #progress {
             margin-top: 20px;
             font-size: 18px;
-            color: #666;
+            color: #344C3D;
         }
         .checkmark__circle {
             stroke-dasharray: 166;
             stroke-dashoffset: 166;
             stroke-width: 2;
             stroke-miterlimit: 10;
-            stroke: #ff9999;
+            stroke: #738A6E;
             fill: none;
             animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
         }
@@ -168,10 +170,10 @@
             border-radius: 50%;
             display: block;
             stroke-width: 2;
-            stroke: #fff;
+            stroke: #BFCFBB;
             stroke-miterlimit: 10;
             margin: 10% auto;
-            box-shadow: inset 0 0 0 #ff9999;
+            box-shadow: inset 0 0 0 #738A6E;
             animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
         }
         .checkmark__check {
@@ -188,7 +190,7 @@
             50% { transform: scale3d(1.1, 1.1, 1); }
         }
         @keyframes fill {
-            100% { box-shadow: inset 0 0 0 30px #ff9999; }
+            100% { box-shadow: inset 0 0 0 30px #738A6E; }
         }
         @media (max-width: 600px) {
             .container {
@@ -217,7 +219,8 @@
 <body>
     <div class="container">
         <div class="title-container">
-            <h1 class="names">이승준 <span class="heart">&hearts;</span> 박은솔</h1>
+<!--            <h1 class="names">이승준 <span class="heart">&hearts;</span> 박은솔</h1>-->
+            <h1 class="names">이승준, 박은솔</h1>
             <h2 class="wedding-photo">Wedding Photo</h2>
         </div>
         <form id="uploadForm">
