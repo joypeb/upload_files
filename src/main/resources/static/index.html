@@ -3,63 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>파일 업로드</title>
+    <title>웨딩 포토 업로드</title>
     <style>
-        /* 기존 스타일 유지 */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Noto+Serif+KR:wght@400;700&display=swap');
         body {
-            font-family: 'Noto Sans KR', Arial, sans-serif;
-            max-width: 100%;
-            margin: 0 auto;
+            font-family: 'Noto Serif KR', serif;
+            margin: 0;
             padding: 20px;
-            background-color: #f0f0f0;
-            box-sizing: border-box;
+            background-color: #fff5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
-        h1 {
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .title-container {
             text-align: center;
-            color: #333;
-            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        .names {
+            font-size: 2.5em;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+        .wedding-photo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3em;
+            color: #ff9999;
+            margin-top: 10px;
+        }
+        .heart {
+            color: #ff6b6b;
+            font-size: 1em;
+            display: inline-block;
+            animation: beat 1s infinite alternate;
+        }
+        @keyframes beat {
+            to { transform: scale(1.1); }
         }
         form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            max-width: 500px;
-            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            text-align: center;
-            font-weight: bold;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 1.1em;
         }
         input[type="text"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 12px;
+            margin-bottom: 20px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 25px;
             font-size: 16px;
-            box-sizing: border-box;
-            text-align: left;
+            text-align: center;
         }
         .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+            height: 150px;
+            margin-bottom: 20px;
+            background-color: #ffd1dc;
+            border-radius: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 230px;
-            height: 120px;
-            margin: 0 auto 20px;
-            background-color: #4CAF50;
-            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            overflow: hidden;
+            position: relative;
         }
         .file-input-wrapper:hover {
-            background-color: #45a049;
+            background-color: #ffb6c1;
         }
         .file-input-wrapper input[type=file] {
             position: absolute;
@@ -71,10 +94,9 @@
             cursor: pointer;
         }
         .file-input-wrapper .btn {
-            text-align: center;
-            padding: 10px;
-            color: white;
+            color: #666;
             font-size: 18px;
+            text-align: center;
         }
         #preview {
             display: flex;
@@ -87,23 +109,20 @@
             width: 80px;
             height: 80px;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 10px;
         }
         button[type="submit"] {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
+            background-color: #ff9999;
             color: white;
             border: none;
-            border-radius: 4px;
+            padding: 15px 30px;
             font-size: 18px;
+            border-radius: 25px;
             cursor: pointer;
-            margin-top: 20px;
             transition: background-color 0.3s;
         }
         button[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #ff7777;
         }
         .modal {
             display: none;
@@ -119,7 +138,7 @@
             background-color: white;
             margin: 15% auto;
             padding: 30px;
-            border-radius: 12px;
+            border-radius: 15px;
             width: 80%;
             max-width: 400px;
             text-align: center;
@@ -127,20 +146,19 @@
         }
         .modal-content h2 {
             margin-top: 0;
-            color: #333;
+            color: #d4af37;
         }
         #progress {
             margin-top: 20px;
-            font-size: 20px;
-            color: #555;
+            font-size: 18px;
+            color: #666;
         }
-        /* 체크마크 스타일 수정 */
         .checkmark__circle {
             stroke-dasharray: 166;
             stroke-dashoffset: 166;
             stroke-width: 2;
             stroke-miterlimit: 10;
-            stroke: #7ac142;
+            stroke: #ff9999;
             fill: none;
             animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
         }
@@ -153,7 +171,7 @@
             stroke: #fff;
             stroke-miterlimit: 10;
             margin: 10% auto;
-            box-shadow: inset 0 0 0 #7ac142;
+            box-shadow: inset 0 0 0 #ff9999;
             animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
         }
         .checkmark__check {
@@ -163,66 +181,59 @@
             animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
         }
         @keyframes stroke {
-            100% {
-                stroke-dashoffset: 0;
-            }
+            100% { stroke-dashoffset: 0; }
         }
         @keyframes scale {
-            0%, 100% {
-                transform: none;
-            }
-            50% {
-                transform: scale3d(1.1, 1.1, 1);
-            }
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
         }
         @keyframes fill {
-            100% {
-                box-shadow: inset 0 0 0 30px #7ac142;
-            }
+            100% { box-shadow: inset 0 0 0 30px #ff9999; }
         }
-
         @media (max-width: 600px) {
-            body {
-                padding: 10px;
+            .container {
+                padding: 20px;
             }
-            h1 {
-                font-size: 20px;
+            .names {
+                font-size: 2em;
             }
-            form {
-                padding: 15px;
+            .wedding-photo {
+                font-size: 2.5em;
             }
             .file-input-wrapper {
-                width: 200px;
-                height: 150px;
+                height: 120px;
             }
             .file-input-wrapper .btn {
                 font-size: 16px;
             }
-            #preview img {
-                width: 60px;
-                height: 60px;
-            }
             button[type="submit"] {
                 font-size: 16px;
+                padding: 12px 24px;
+                margin-top: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <h1>파일 업로드</h1>
-    <form id="uploadForm">
-        <label for="name">이름</label>
-        <input type="text" id="name" name="name" required>
-
-        <div class="file-input-wrapper">
-            <div class="btn">파일 선택<br>(사진 및 동영상)</div>
-            <input type="file" id="files" name="files" multiple accept="image/*,video/*" required>
+    <div class="container">
+        <div class="title-container">
+            <h1 class="names">이승준 <span class="heart">&hearts;</span> 박은솔</h1>
+            <h2 class="wedding-photo">Wedding Photo</h2>
         </div>
+        <form id="uploadForm">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" required placeholder="성함을 입력해주세요">
 
-        <div id="preview"></div>
+            <div class="file-input-wrapper">
+                <div class="btn">추억을 선택해주세요<br>(사진 및 동영상)</div>
+                <input type="file" id="files" name="files" multiple accept="image/*,video/*" required>
+            </div>
 
-        <button type="submit">업로드</button>
-    </form>
+            <div id="preview"></div>
+
+            <button type="submit">추억 공유하기</button>
+        </form>
+    </div>
 
     <div id="uploadModal" class="modal">
         <div class="modal-content">
@@ -320,6 +331,16 @@
                 checkmark.style.display = 'none';
             }, 3000);
         });
+
+        // document.addEventListener('DOMContentLoaded', (event) => {
+        //     const heart = document.querySelector('.heart');
+        //     setInterval(() => {
+        //         heart.style.transform = 'scale(1.1)';
+        //         setTimeout(() => {
+        //             heart.style.transform = 'scale(1)';
+        //         }, 1000);
+        //     }, 2000);
+        // });
     </script>
 </body>
 </html>
